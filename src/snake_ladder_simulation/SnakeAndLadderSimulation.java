@@ -3,6 +3,7 @@
 //He is rolling the die to get a number.
 //He is checking for an option, whether it is a No play, Ladder or Snake.
 //Repeat to roll the die till the player reaches to the winning position 100.
+//Repeat to roll the die till the player reaches to the exact winning position 100.
 
 package snake_ladder_simulation;
 
@@ -36,8 +37,15 @@ public class SnakeAndLadderSimulation {
             int position = checkOption(playerPosition, ladder, snake);
             playerPosition = position;
             System.out.println("Player current position is : " + playerPosition + "\n");
-        }while(playerPosition != winningPosition && playerPosition <= winningPosition);
-        System.out.println("Player reaches the winning position");
+            if (playerPosition > winningPosition)
+            {
+                playerPosition -= dieRolls;
+                System.out.println("Position goes beyond 100.\nSo no play - Player stays in the same position \n");
+                System.out.println("Player current position is : " + playerPosition + "\n");
+                System.out.println("The number required by the player is : "+(winningPosition-playerPosition)+"\n");
+            }
+        }while(playerPosition != winningPosition);
+        System.out.println("Player reaches the exact winning position");
     }
     //Check for the options.
     public static int checkOption(int playerPosition, int[] ladder, int[] snake) {
