@@ -4,6 +4,7 @@
 //He is checking for an option, whether it is a No play, Ladder or Snake.
 //Repeat to roll the die till the player reaches to the winning position 100.
 //Repeat to roll the die till the player reaches to the exact winning position 100.
+//Report the no of times the dice was played to win the game and also the position after every die roll.
 
 package snake_ladder_simulation;
 
@@ -22,16 +23,18 @@ public class SnakeAndLadderSimulation {
         int[] ladder = {4,15,35,55,87};
         int[] snake = {20,44,67,92};
         int winningPosition = 100;
+        int count = 0;
         Random random = new Random();
         System.out.println("Starting Position of the Single Player is : "+startingPosition+"\n");
 
-        startsGame(playerPosition,winningPosition, ladder,snake,random);
+        startsGame(playerPosition, winningPosition, count, ladder,snake,random);
     }
     //Starts the game.
-    public static void startsGame(int playerPosition,int winningPosition, int[] ladder, int[] snake, Random random) {
+    public static void startsGame(int playerPosition,int winningPosition, int count, int[] ladder, int[] snake, Random random) {
         do {
             //Rolling the die.
             int dieRolls = (random.nextInt(6) + 1);
+            count++;
             System.out.println("The Player rolls the die and gets a number : " + dieRolls + "\n");
             playerPosition = playerPosition + dieRolls;
             int position = checkOption(playerPosition, ladder, snake);
@@ -45,7 +48,8 @@ public class SnakeAndLadderSimulation {
                 System.out.println("The number required by the player is : "+(winningPosition-playerPosition)+"\n");
             }
         }while(playerPosition != winningPosition);
-        System.out.println("Player reaches the exact winning position");
+        System.out.println("Player reaches the exact winning position. \n");
+        System.out.println("The number of times the dice was rolled is : "+count);
     }
     //Check for the options.
     public static int checkOption(int playerPosition, int[] ladder, int[] snake) {
